@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 import os
 
 from regex import P
-from src.helpers import load_pdf_file, filter_to_minimal_docs,text_split,download_hugging_face_embeddings
+from src.helpers import load_pdf_file, filter_to_minimal_docs,text_split,download_embeddings
 from pinecone import Pinecone
 from pinecone import ServerlessSpec
 from langchain_pinecone import PineconeVectorStore
@@ -16,7 +16,7 @@ os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 extracted_data = load_pdf_file(data="data/")
 filter_data = filter_to_minimal_docs(extracted_data)
 texts_chunk = text_split(filter_data)
-embeddings =download_hugging_face_embeddings()
+embeddings =download_embeddings()
 pinecone_api_key=PINECONE_API_KEY
 pc=Pinecone(api_key=pinecone_api_key)
 index_name = "medical"  
